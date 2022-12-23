@@ -16,4 +16,19 @@ $(document).ready(function () {
     }
     $('.amenities h4').text(msgFiltered);
   });
+  $.ajax({
+    type: 'GET',
+    url: 'http://127.0.0.1:5001/api/v1/status/',
+    success: function (data) {
+      if (data.status === 'OK') {
+        $('div#api_status').addClass('available');
+      } else {
+        $('div#api_status').removeClass('available');
+      }
+    },
+    error: function () {
+      $('div#api_status').removeClass('available');
+      console.log('error');
+    }
+  });
 });
